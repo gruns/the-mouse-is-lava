@@ -30,6 +30,13 @@
         return $selected
     }
 
+    function selectFirstResult () {
+        const $results = getSearchResults()
+        if ($results) {
+            selectResult($results[0])
+        }
+    }
+
     function selectResult ($result) {
         $result.classList.add(SELECTED_CLASSNAME)
         
@@ -50,13 +57,16 @@
 
         const $arrow = document.createElement('div')
         $arrow.id = ARROW_CLASSNAME
-        $arrow.style.width = '50px'
-        $arrow.style.height = '50px'
-        $arrow.style.backgroundColor = 'red'
-        $arrow.style.position = 'absolute'
-        $arrow.style.left = '-60px'
+
         $arrow.style.top = '50%'
+        $arrow.style.left = '-60px'
+        $arrow.style.width = '0'
+        $arrow.style.height = '0'
+        $arrow.style.position = 'absolute'
         $arrow.style.transform = 'translateY(-50%)'
+        $arrow.style.borderTop = '25px solid transparent'
+        $arrow.style.borderBottom = '25px solid transparent'
+        $arrow.style.borderLeft = '50px solid #B0B0B0'
 
         const $h3 = $result.querySelector('h3')
         $h3.style.position = 'relative'
@@ -201,11 +211,9 @@
         handleKeypress($results, event)
     })
 
-    document.addEventListener('DOMContentLoaded', function() {
-        if ($results.length === 0) {
-            cl('loading initial results...')
-            $results = getSearchResults()
-            cl('results', results)
-        }
-    })
+    if (document.readyState === 'loading') {  // page still loading
+        document.addEventListener('DOMContentLoaded', selectFirstResult)
+    } else {  // DOM is already loaded
+        selectFirstResult()
+    }
 })()

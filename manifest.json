@@ -1,20 +1,21 @@
 {
     "manifest_version": 3,
-    "name": "Ansgar's Google Search Shortcuts",
+    "name": "Google SpeedyKeys",
     "version": "1.0",
-    "description": "Adds keyboard shortcuts to Google search results.",
+    "description": "Adds speedy keyboard shortcuts to Google search results.",
     "permissions": [
         "activeTab",
         "scripting"
     ],
     "content_scripts": [
         {
+            "js": ["speedykeys.js"],
+            "run_at": "document_end",
             "matches": [
                 "*://*.google.com/search*",
                 "*://*.google.com/webhp*",
                 "*://*.google.com/imghp*"
-            ],
-            "js": ["speedykeys.js"]
+            ]
         }
     ],
     "background": {
