@@ -1,8 +1,14 @@
-## Google SpeedyKeys
+## The Mouse is Lava
 
-SpeedyKeys is a Chrome extension that adds convenient keyboard shortcuts
-to navigate Google search pages. VIM-style navigation is supported with
-`j` for next and `k` for previous. The arrow keys are also supported.
+The Mouse is Lava is a Chrome extension that adds convenient keyboard
+shortcuts to popular web pages, like Google search results. More sites
+and keyboard shortcuts are forthcoming.
+
+#### Google Search Results
+
+For navigation of Google search results, VIM-style keybinds are
+supported with `j` for next and `k` for previous. Arrow keys are also
+supported.
 
 Keyboard shortcuts:
 
@@ -28,7 +34,7 @@ Until then, to install, download the contents of this repository to a
 new directory, like with:
 
 ```
-git clone https://github.com/gruns/google-speedy-keys
+git clone https://github.com/gruns/the-mouse-is-lava
 ```
 
 Then head to [chrome://extensions/](chrome://extensions/) and load this
