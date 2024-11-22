@@ -1,5 +1,5 @@
 //
-// Google SpeedyKeys - Keyboard Shortcuts for Google Search
+// The Mouse is Lava - Keyboard Shortcuts for the Web
 //
 // Ansgar Grunseid
 // grunseid.com
@@ -11,12 +11,24 @@
 ;(function () {
     const cl = console.log
 
-    const ARROW_CLASSNAME = 'ansgar-shortcuts-selected-arrow'
-    const SELECTED_CLASSNAME = 'ansgar-shortcuts-selected-result'
+    const ARROW_CLASSNAME = 'the-mouse-is-lava-selected-arrow'
+    const SELECTED_CLASSNAME = 'the-mouse-is-lava-selected-result'
 
     function isInputFocused () {
         const activeEle = document.activeElement
         return ['input', 'textarea'].includes(activeEle.tagName.toLowerCase())
+    }
+
+    function isInViewport ($ele) {
+        const $docEle = document.documentElement
+        const pos = $ele.getBoundingClientRect()
+        const inViewport = (
+            pos.top >= 0 &&
+            pos.left >= 0 &&
+            pos.right <= (window.innerWidth || $docEle.clientWidth) &&
+            pos.bottom <= (window.innerHeight || $docEle.clientHeight))
+
+        return inViewport
     }
 
     function getSelectedResult () {
@@ -30,43 +42,48 @@
         return $selected
     }
 
-    function selectFirstResult () {
-        const $results = getSearchResults()
-        if ($results) {
-            selectResult($results[0])
-        }
+    function isBackgroundDark () {
+        const bgColor = window.getComputedStyle(document.body).backgroundColor
+        const rgb = bgColor.match(/\d+/g).map(Number)
+
+        // calculate brightness using the standard luminance formula:
+        //   brightness = (R * 0.299) + (G * 0.587) + (B * 0.114)
+        const brightness = (rgb[0] * 0.299 + rgb[1] * 0.587 + rgb[2] * 0.114);
+
+        // brightness < 128 = dark, otherwise light
+        const isDark = (brightness < 128)
+
+        return isDark
     }
 
-    function selectResult ($result) {
+    function selectResult ($result, scrollIntoView=true) {
         $result.classList.add(SELECTED_CLASSNAME)
-        
-        const pos = $result.getBoundingClientRect()
-        const docele = document.documentElement
-        const isInViewport = (
-            pos.top >= 0 &&
-            pos.left >= 0 &&
-            pos.right <= (window.innerWidth || docele.clientWidth) &&
-            pos.bottom <= (window.innerHeight || docele.clientHeight))
-        if (!isInViewport) {
+
+        if (scrollIntoView && !isInViewport($result)) {
             $result.scrollIntoView({
-                behavior: 'smooth',  // 'smooth' -> smooth scrolling
+                behavior: 'auto',  // 'smooth' for smooth scrolling, 'auto' instant
                 block: 'center',  // 'center' -> center vertically
                 inline: 'nearest',  // 'nearest' -> visible horizontally
             })
+        }
+
+        let arrowColor = '#222'  // black arrow on light backgrounds
+        if (isBackgroundDark()) {
+            arrowColor = '#fff'  // light arrow on dark backgrounds
         }
 
         const $arrow = document.createElement('div')
         $arrow.id = ARROW_CLASSNAME
 
         $arrow.style.top = '50%'
-        $arrow.style.left = '-60px'
+        $arrow.style.left = '-40px'
         $arrow.style.width = '0'
         $arrow.style.height = '0'
         $arrow.style.position = 'absolute'
         $arrow.style.transform = 'translateY(-50%)'
-        $arrow.style.borderTop = '25px solid transparent'
-        $arrow.style.borderBottom = '25px solid transparent'
-        $arrow.style.borderLeft = '50px solid #B0B0B0'
+        $arrow.style.borderTop = '15px solid transparent'
+        $arrow.style.borderBottom = '15px solid transparent'
+        $arrow.style.borderLeft = `30px solid ${arrowColor}`
 
         const $h3 = $result.querySelector('h3')
         $h3.style.position = 'relative'
@@ -121,11 +138,18 @@
     function getSearchResults () {
         // search results have the 'g' class first and another class (that
         // likely changes a lot). the 'g' class must be the first class. examples:
-        //   is a search result parent ele:     div.g.Ww4FFb.vt6azd.tF2Cxc.asEBEc
+        //   is a search result parent ele:    div.g.Ww4FFb.vt6azd.tF2Cxc.asEBEc
         //   not a search result parent ele
-        //     *unless* its the first element:  div.g
-        //   not a search result parent ele:    div.liYKde.g.VjDLd
+        //     *unless* its the first element: div.g
+        //   not a search result parent ele:   div.liYKde.g.VjDLd
         let $eles = document.querySelectorAll('#search h3:first-of-type')
+
+        // filter out `People also ask` search results, whose root
+        // element has the data-sgrd="true" attribute
+        $eles = Array.from($eles).filter($ele => {
+            return !$ele.closest('[data-sgrd="true"]')
+        })
+
         $eles = Array.from($eles).filter(($ele, idx) => {
             const $parent = getNthParentEle($ele, 7)
             const classList = $parent.classList
@@ -156,18 +180,43 @@
     function loadNavbarItem (name) {
         name = name.toLowerCase()
 
+        let $items
         const $main = document.getElementById('main')
-        const $navbar = $main.querySelectorAll('[role="navigation"]')[1]
-        const $items = $navbar.querySelectorAll('[role="listitem"]')
-        
-        for (const $item of $items) {
-            const $a = $item.querySelector('a')
+        // sometimes the first [role="navigation"] element is the
+        // navbar. sometimes it isnt. I'm not sure when or why it
+        // changes. but either way, be robust in finding the navbar so
+        // iterate through all the returned [role="navigation"] elements
+        // and select the first one with <a> children, which are the
+        // 'All', 'Images', etc anchors
+        const $navigations = $main.querySelectorAll('[role="navigation"]')
+        let $navbar = $navigations[0]
+        for (const $navigation of $navigations) {
+            $anchors = $navigation.querySelectorAll('a')
+            if ($anchors.length > 0) {
+                $navbar = $navigation
+                break
+            }
+        }
+
+        if (!$anchors) {
+            throw new Error('No NavBar found. Update the CSS selectors.')
+        }
+
+        for (const $a of $anchors) {
             const $div = $a.querySelector('div')
             const itemName = $div.textContent.trim().toLowerCase()
 
             if (itemName === name && $a.href) {  // no $a.href if same page
                 window.location.href = $a.href
             }
+        }
+    }
+
+    function onPageLoad () {
+        const $results = getSearchResults()
+
+        if ($results.length > 0 && isInViewport($results[0])) {
+            selectResult($results[0], false)  // dont scroll the page initially
         }
     }
 
@@ -207,13 +256,12 @@
         }
 
         const $results = getSearchResults()
-
         handleKeypress($results, event)
     })
 
     if (document.readyState === 'loading') {  // page still loading
-        document.addEventListener('DOMContentLoaded', selectFirstResult)
+        document.addEventListener('DOMContentLoaded', onPageLoad)
     } else {  // DOM is already loaded
-        selectFirstResult()
+        onPageLoad()
     }
 })()
