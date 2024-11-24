@@ -1,10 +1,15 @@
+<h1 align="center">
+  <img src="logo.svg" width="320px" height="320px" alt="The Mouse is Lava">
+</h1>
+
+
 ## The Mouse is Lava
 
-The Mouse is Lava is a Chrome extension that adds convenient keyboard
-shortcuts to popular web pages, like Google search results. More sites
-and keyboard shortcuts are forthcoming.
+The Mouse is Lava is a Chrome extension that adds keyboard shortcuts to
+popular websites, like Google search results. More sites and keyboard
+shortcuts are forthcoming.
 
-#### Google Search Results
+### Google Search Results
 
 For navigation of Google search results, VIM-style keybinds are
 supported with `j` for next and `k` for previous. Arrow keys are also
@@ -25,6 +30,7 @@ Keyboard shortcuts:
 - `m` - Load the `Maps` results tab.
 - `b` - Load the `Books` results tab.
 - `l` - Load the `Flights` results tab.
+
 
 ### Install
 
