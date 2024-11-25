@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="logo.svg" width="320px" height="320px" alt="The Mouse is Lava">
+  <img src="logo.png" width="320px" height="320px" alt="The Mouse is Lava">
 </h1>
 
 
