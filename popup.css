@@ -1,0 +1,51 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #282828;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  width: 320px;  /* max width is 800px */
+  height: 48px;  /* max height is 800px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.find-box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #1f1f1f;
+  border-radius: 5px;
+  padding: 0px 14px;
+}
+
+.find-box input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.controls button:hover {
+  color: #ccc;
+}

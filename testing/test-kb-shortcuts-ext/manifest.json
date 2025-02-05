@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "Keyboard Shortcuts Example2",
+    "version": "1.0",
+    "permissions": ["activeTab", "scripting"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "commands": {
+        "focusNextInputElement": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+P"
+            },
+            "description": "Focus the next input element"
+        },
+        "openSearchBar": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+I"
+            },
+            "description": "Open the search bar"
+        }
+    }
+}

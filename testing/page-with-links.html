@@ -1,0 +1,121 @@
+<body style="padding: 50px; background-color: #ccc; font-size: 1.5em;">
+  <script>
+    // code below was taken from testing and not adapted. ie it will
+    // break if uncommented and it needs to be updated
+    /*
+        const $form = document.getElementById('submitForm')
+        const $searchInput = document.getElementById('findInPage')
+        if ($searchInput) {
+            $searchInput.focus()
+            $searchInput.addEventListener('input', () => {
+                const s = $searchInput.value
+                findInViewport(s)
+            })
+            $form.addEventListener('submit', () => {
+                event.preventDefault()
+                clickSelectedMatch()
+            })
+        }
+
+        const $previousBtn = document.getElementById('previousBtn')
+        const $nextBtn = document.getElementById('nextBtn')
+        if ($previousBtn) {
+            $previousBtn.addEventListener('click', _ => {
+                selectMatchFromOffset(-1)
+            })
+        }
+        if ($nextBtn) {
+            $nextBtn.addEventListener('click', _ => {
+                selectMatchFromOffset(1)
+            })
+        }
+        */
+  </script>
+
+  page with links to test ctrl+f find and [enter] and ctrl+[enter]
+  <br>
+  <br>
+  <br>
+  <form id='submitForm'>
+    <input type='text' placeholder='Find in page...' id='findInPage'
+           autocomplete="off" style="font-size: 20px" />
+    <button id="previousBtn">prev</button>
+    <button id="nextBtn">next</button>
+  </form>
+  <br>
+  google
+  <br>
+  <br>
+  <a href="#google 1">google 1</a>
+  <br>
+  <br>
+  <a href="#wikipedia 11 2">wikipedia 11 2</a>
+  <br>
+  <br>
+  <a href="#chatgpt 111 22 333">chatgpt 111 22 333</a>
+  <br>
+  <br>
+  <a href="#google">google</a>
+  <br>
+  <br>
+  <a href="#across text"><b>across</b> <span>text</span></a>
+  <br>
+  <br>
+  <div onclick="window.location = '#depth1'">
+    clickable parent depth=1
+  </div>
+  <br>
+  <div onclick="window.location = '#depth2'">
+    <span>
+      clickable parent depth=2
+    </span>
+  </div>
+  <br>
+  <div onclick="window.location = '#depth3'">
+    <span>
+      <span>
+        clickable parent depth=3
+      </span>
+    </span>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <a href="#google">google</a>
+  <br>
+  <br>
+</body>

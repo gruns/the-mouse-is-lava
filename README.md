@@ -5,9 +5,30 @@
 
 ## The Mouse is Lava
 
-The Mouse is Lava is a Chrome extension that adds keyboard shortcuts to
-popular websites, like Google search results. More sites and keyboard
-shortcuts are forthcoming.
+The Mouse is Lava is a Chrome extension that adds general keyboard
+shortcuts to navigate every website and specific keyboard shortcuts to
+navigate specific, popular websites. Like Google
+
+More sites and keyboard shortcuts are forthcoming. PRs always welcome to
+add support for more sites! 🙌
+
+Quickstart guide:
+
+  - `Ctrl+i` to find links in the page and then `[enter]` to click or
+    `[Ctrl+enter]` to control click them.
+  - `Ctrl+b` focuses input boxes.
+  - `j`+`k` and `[up-arrow]`+`[down-arrow]` navigate Google search
+    results.
+
+
+### Universal Shortcuts That Work on Every Site
+
+- `Ctrl+b` - Focus the next (or first) visible, interactable, and
+  not-`disabled` text input element. Eg the first interactable `<input
+  type="text">` or `<textarea>` element in the viewport. Subsequent
+  presses of `Ctrl+b` iterate through and focus the next text input
+  element in the viewport.
+
 
 ### Google Search Results
 
@@ -47,3 +68,11 @@ Then head to [chrome://extensions/](chrome://extensions/) and load this
 extension, unpacked, by clicking `Load unpacked` in the upper left and
 selecting the directory with this repository's contents.
 
+
+### Known Improvements. PRs welcome! 🙌
+
+- Add support for `Ctrl+B` to focus `<textarea>` elements, too. Not just
+  `<input>` elements.
+
+- Automatically click Google AI snippets `Show more` once the AI result
+  is ready. Add this as an optional feature

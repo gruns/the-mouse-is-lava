@@ -1,15 +1,51 @@
 {
     "manifest_version": 3,
     "name": "The Mouse is Lava",
-    "version": "1.0",
-    "description": "Keyboard Shortcuts for the Web",
+    "version": "0.1",
+    "description": "Keyboard shortcuts to navigate websites with your keyboard. Don't touch that mouse. Built by Ansgar Grunseid.",
     "permissions": [
         "activeTab",
         "scripting"
     ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "The Mouse is Lava",
+        "default_icon": {}
+    },
+    "commands": {
+        "openSearchBar": {
+            "suggested_key": {
+                "default": "Ctrl+I"
+            },
+            "description": "Open the find bar"
+        },
+        "focusNextInputElement": {
+            "suggested_key": {
+                "default": "Ctrl+B"
+            },
+            "description": "Focus next input element"
+        }
+    },
     "content_scripts": [
         {
-            "js": ["main.js"],
+            "js": ["common.js", "mark.min.js", "universal.js"],
+            "run_at": "document_end",
+            "matches": [
+                "*://*/*"
+            ]
+        },
+        {
+            "js": ["common.js", "mark.min.js", "universal.js"],
+            "run_at": "document_end",
+            "matches": [
+                "http://lh:3990/*"
+            ]
+        },
+        {
+            "js": ["google.js"],
             "run_at": "document_end",
             "matches": [
                 "*://*.google.ad/search*",
@@ -207,6 +243,5 @@
                 "*://*.google.ws/search*"
             ]
         }
-    ],
-    "commands": {}
-}
+    ]
+ }
