@@ -286,6 +286,14 @@
     MIL.clickSelectedMatch = clickSelectedMatch
 
     function onPageLoad () {
+        // no document.head in format like .svg, .txt, .csv, .log, etc,
+        // CSS rules cant be added to the page via document.head. and it
+        // makes no sense to add them to the 'page', either, as its not
+        // an HTML page
+        if (!document || !document.head) {
+            return
+        }
+
         const $style = document.createElement('style')
         $style.textContent = CSS
         document.head.appendChild($style)
