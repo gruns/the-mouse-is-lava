@@ -1,9 +1,19 @@
+//
+// The Mouse is Lava - Keyboard Shortcuts for the Web
+//
+// Ansgar Grunseid
+// grunseid.com
+// grunseid@gmail.com
+//
+// License: MIT
+//
+
 const cl = console.log
 
 // same as in popup.js. TODO(ans): refactor
 function callInActiveTab (fnName, ...args) {
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-        if (tabs.length < 1) {
+        if (tabs.length < 1 || !tabs[0].id) {
             return
         }
 
@@ -48,7 +58,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // the active tab, which auto-closes the popup
     if (message.closePopup) {
         chrome.windows.getCurrent(window => {
-            chrome.windows.update(window.id, { focused: true })
+            if (window && window.id) {
+                chrome.windows.update(window.id, { focused: true })
+            }
         })
     }
 })

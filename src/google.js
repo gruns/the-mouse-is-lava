@@ -106,8 +106,9 @@
             idx = Math.max(Math.min(idx, $results.length - 1), 0)  // clamp
             $toSelect = $results[idx]
         }
-
-        selectResult($toSelect)
+        if ($toSelect) {
+            selectResult($toSelect)
+        }
     }
 
     function deselectResult ($result) {

@@ -179,7 +179,7 @@
     // with addEventListener('click', ...). there's no way to test for
     // those in JS, unfortunately 😕; getEventListeners() is a
     // non-standard JS API only available in chrome dev tools
-    function firstClickableAncestor ($ele, depth=5) {
+    function firstClickableAncestor ($ele, depth=7) {
         if (!$ele || depth < 1) {
             return null
         }

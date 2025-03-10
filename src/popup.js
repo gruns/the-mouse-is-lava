@@ -1,3 +1,13 @@
+//
+// The Mouse is Lava - Keyboard Shortcuts for the Web
+//
+// Ansgar Grunseid
+// grunseid.com
+// grunseid@gmail.com
+//
+// License: MIT
+//
+
 const cl = console.log
 
 // same as in background.js. TODO(ans): refactor
@@ -63,10 +73,12 @@ document.addEventListener('DOMContentLoaded', () => {
     $closeBtn.addEventListener('click', closePopup)
 
     document.addEventListener('keydown', function (event) {
-        // TODO(ans): support meta and ctrl across windows and os x
-        if (event.metaKey && event.key === 'j') {
+        // support both the Ctrl key and Meta on OS X
+        const ctrlDown = event.ctrlKey || event.metaKey
+        cl('ctrlDown', ctrlDown, event.ctrlKey, event.metaKey, event.key)
+        if (ctrlDown && event.key === 'j') {
             selectNextMatch()
-        } else if (event.metaKey && event.key === 'k') {
+        } else if (ctrlDown && event.key === 'k') {
             selectPreviousMatch()
         } else if (event.shiftKey && event.key === 'Tab') {
             event.preventDefault()
@@ -77,8 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
             event.stopPropagation()
             selectNextMatch()
         } else if (event.key === 'Enter') {
-            const ctrlDown = !!event.metaKey
             callInActiveTab('clickSelectedMatch', ctrlDown)
+
+            $findInput.select()
         }
     })
 })
