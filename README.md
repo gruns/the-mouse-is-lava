@@ -37,7 +37,7 @@ All keyboard shortcuts are customizable in
 
 #### Ctrl+B - Focus The First Visible Input Element
 
-`Ctrl+B` - Focus the first, or next, visible, interactable, and
+`Ctrl+B` - Focuses the first, or next, visible, interactable, and
 not-disabled `<input>` element in the visible page. I.e. the first
 interactable `<input type="text">` element. `<textarea>` elements aren't
 supported yet, but will be.
