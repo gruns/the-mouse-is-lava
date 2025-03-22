@@ -46,7 +46,7 @@ The first press of `Ctrl+B` focuses the first input element in the
 visible page. Subsequent presses of `Ctrl+B` iteratively focus
 successive `<input>` elements in the visible page.
 
-<p>
+<p style='margin-left: 20px'>
   <img src='readme-assets/focus-next-input-element.gif' width='500'>
 </p>
 
@@ -76,7 +76,7 @@ become active:
 - `Ctrl+Enter` - Control+click the currently selected link. E.g. open
   the selected link in a new tab.
 
-<p>
+<p style='margin-left: 20px'>
   <img src='readme-assets/link-finder.gif' width='800'>
 </p>
 
@@ -102,8 +102,8 @@ By default, the first Google search result is automatically selected on
 page load so you can just press `[enter]`, or `Ctrl+Enter`, to navigate
 to the first result.
 
-<p>
-  <img src='readme-assets/google-search-shortcuts.gif' width='500'>
+<p style='margin-left: 20px'>
+  <img src='readme-assets/google-search-shortcuts.gif' width='800'>
 </p>
 
 
@@ -113,18 +113,18 @@ MIL adds keyboard shortcuts to navigate between the different category
 tabs. While on a Google.com search results page, these keyboard
 shortcuts become available to navigate:
 
-- `a` - Load the `All` category tab.
-- `n` - Load the `News` category tab.
-- `i` - Load the `Images` category tab.
-- `v` - Load the `Videos` category tab.
-- `s` - Load the `Shopping` category tab.
-- `f` - Load the `Forums` category tab.
-- `w` - Load the `Web` category tab.
-- `m` - Load the `Maps` category tab.
-- `b` - Load the `Books` category tab.
-- `l` - Load the `Flights` category tab.
+- `a` - Load the `All` results tab.
+- `n` - Load the `News` results tab.
+- `i` - Load the `Images` results tab.
+- `v` - Load the `Videos` results tab.
+- `s` - Load the `Shopping` results tab.
+- `f` - Load the `Forums` results tab.
+- `w` - Load the `Web` results tab.
+- `m` - Load the `Maps` results tab.
+- `b` - Load the `Books` results tab.
+- `l` - Load the `Flights` results tab.
 
-<p>
+<p style='margin-left: 20px'>
   <img src='readme-assets/google-navbar.png' width='500'>
 </p>
 
@@ -140,7 +140,7 @@ git clone https://github.com/gruns/the-mouse-is-lava
 and then load the extension unpacked on
 [chrome://extensions/](chrome://extensions/).
 
-<p>
+<p style='margin-left: 20px'>
   <img src='readme-assets/load-unpacked.png' width='500'>
 </p>
 
