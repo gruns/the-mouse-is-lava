@@ -136,18 +136,24 @@
             return !$ele.closest('[data-sgrd="true"]')
         })
 
-        $eles = Array.from($eles).filter(($ele, idx) => {
-            const $parent = getNthParentEle($ele, 7)
-            const classList = $parent.classList
-
-            if (idx === 0 && classList.contains('g')) {  // first result
-                return true
-            } else if (classList.contains('g') && classList.length > 1) {
-                return true
-            }
-
-            return false
-        })
+        // 2025/03/22: google parent elements stopped having the 'g'
+        // class. so the filter() code below is no longer
+        // needed. commented out instead of removed in case future
+        // filtering code is needed
+        //
+        //$eles = Array.from($eles).filter(($ele, idx) => {
+        //    const $parent = getNthParentEle($ele, 7)
+        //    cl('$parent', $parent)
+        //    const classList = $parent.classList
+        //
+        //    if (idx === 0 && classList.contains('g')) {  // first result
+        //        return true
+        //    } else if (classList.contains('g') && classList.length > 1) {
+        //        return true
+        //    }
+        //
+        //    return true
+        //})
         const $searchResults = $eles.map($ele => getNthParentEle($ele, 7))
 
         return $searchResults
