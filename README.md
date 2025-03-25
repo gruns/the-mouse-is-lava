@@ -3,7 +3,7 @@
 </h1>
 
 
-## 🌋 The Mouse is Lava
+# 🌋 The Mouse is Lava
 
 The Mouse is Lava (MIL) is a [Chrome
 extension](https://chromewebstore.google.com/detail/The%20Mouse%20is%20Lava/pahaiknnkdphjllfldognhanpfblfbig)
@@ -32,10 +32,10 @@ All keyboard shortcuts are customizable in
 [chrome://extensions/shortcuts](chrome://extensions/shortcuts).
 
 
-### Universal Shortcuts That Work on Every Site
+## Universal Shortcuts That Work on Every Site
 
 
-#### Ctrl+B - Focus The First Visible Input Element
+### Ctrl+B - Focus The First Visible Input Element
 
 `Ctrl+B` - Focuses the first, or next, visible, interactable, and
 not-disabled `<input>` element in the visible page. I.e. the first
@@ -55,7 +55,7 @@ element in
 [chrome://extensions/shortcuts](chrome://extensions/shortcuts).
 
 
-#### Ctrl+I - Find Links and Click Them
+### Ctrl+I - Find Links and Click Them
 
 `Ctrl+I` - Opens the link search box to find clickable links in the
 visible page that contain your search query text. Think of the link
@@ -84,9 +84,9 @@ You can change the default `Ctrl+I` keybind that opens the link search
 box in [chrome://extensions/shortcuts](chrome://extensions/shortcuts).
 
 
-### Google.com Shortcuts
+## Google.com Shortcuts
 
-#### Google Search Shortcuts
+### Google Search Shortcuts
 
 MIL adds keyboard shortcuts to navigate Google search results. While on
 google.com search pages, these keyboard shortcuts become active:
@@ -107,7 +107,7 @@ to the first result.
 </p>
 
 
-#### Google Navbar Shortcuts
+### Google Navbar Shortcuts
 
 MIL adds keyboard shortcuts to navigate between the different category
 tabs. While on a Google.com search results page, these keyboard
@@ -129,7 +129,7 @@ shortcuts become available to navigate:
 </p>
 
 
-### Development
+## Development
 
 To develop MIL locally, first check out this repository
 
@@ -145,7 +145,7 @@ and then load the extension unpacked on
 </p>
 
 
-### Known Improvements. PRs welcome! 🙌
+## Known Improvements. PRs welcome! 🙌
 
 - Add support for `Ctrl+B` to focus `<textarea>` elements, too. Not just
   `<input>` elements.
