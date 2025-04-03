@@ -44,16 +44,41 @@ window.__MIL = {}
     MIL.isInViewport = isInViewport
 
     function isVisible ($ele) {
-        // TODO(ans): improve this function to verify that the element
-        // is _fully_ visible. dont just check the display and
-        // visibility properties; also make sure there aren't any
-        // elements occluding/above the element. that is, the user can
-        // actually see and interact with the element
-        if ($ele.style.display != 'none' &&
-            $ele.style.visibility != 'hidden') {
-            return true
+        // check ele size and basic CSS visibility
+        const rect = $ele.getBoundingClientRect()
+        const style = window.getComputedStyle($ele)
+        if (style.display === 'none' || style.visibility === 'hidden' ||
+            style.opacity === '0' || rect.width === 0 || rect.height === 0) {
+            return false
         }
-        return false
+
+        // run a super simple occlusion check by making sure the four
+        // corners + center of the element are visible and not
+        // occluded. if the ele is outside the viewport,
+        // elementFromPoint() doesn't work. so ignore those elements
+        const points = [
+            [Math.floor((rect.left + rect.right) / 2), Math.floor((rect.top + rect.bottom) / 2)],
+            [Math.floor(rect.left + 1), Math.floor(rect.top + 1)],
+            [Math.floor(rect.right - 1), Math.floor(rect.top + 1)],
+            [Math.floor(rect.left + 1), Math.floor(rect.bottom - 1)],
+            [Math.floor(rect.right - 1), Math.floor(rect.bottom - 1)]
+        ]
+
+        for (const [x, y] of points) {
+            // $ele is off screen; skip occlusion check with
+            // elementFromPoint()
+            const w = window
+            if (x < 0 || y < 0 || x > w.innerWidth || y > w.innerHeight) {
+                continue
+            }
+
+            const topEl = document.elementFromPoint(x, y)
+            if (!$ele.contains(topEl) && topEl !== $ele) {
+                return false
+            }
+        }
+
+        return true
     }
     MIL.isVisible = isVisible
 })()

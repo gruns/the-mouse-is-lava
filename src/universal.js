@@ -236,7 +236,7 @@
         // those are what should be iterated through
         const $matchesToClickables = $matches.map(
             $e => firstClickableAncestor($e))
-        
+
         const $clickables = [...new Set($matchesToClickables)]
         //const $clickables = [...new Set($matchesToClickables.filter(
         //    $e => MIL.isVisible($e) && MIL.isInViewport($e)))]

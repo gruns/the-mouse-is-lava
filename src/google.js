@@ -130,11 +130,11 @@
         //   not a search result parent ele:   div.liYKde.g.VjDLd
         let $eles = d.querySelectorAll('#search h3:first-of-type')
 
-        // filter out `People also ask` search results, whose root
-        // element has the data-sgrd="true" attribute
-        $eles = Array.from($eles).filter($ele => {
-            return !$ele.closest('[data-sgrd="true"]')
-        })
+
+        // filter out results that are hidden or occluded, like behind
+        // hidden behind dropdown arrows in the `People also ask` and
+        // `Things to know` blocks
+	      $eles = Array.from($eles).filter(MIL.isVisible)
 
         // 2025/03/22: google parent elements stopped having the 'g'
         // class. so the filter() code below is no longer
@@ -154,7 +154,7 @@
         //
         //    return true
         //})
-        const $searchResults = $eles.map($ele => getNthParentEle($ele, 7))
+        const $searchResults = $eles.map($ele => getNthParentEle($ele, 2))
 
         return $searchResults
     }
