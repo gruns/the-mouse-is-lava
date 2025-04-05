@@ -132,9 +132,10 @@
 
 
         // filter out results that are hidden or occluded, like behind
-        // hidden behind dropdown arrows in the `People also ask` and
-        // `Things to know` blocks
-	      $eles = Array.from($eles).filter(MIL.isVisible)
+        // dropdowns in the `People also ask` and `Things to know`
+        // sections
+	      $eles = Array.from($eles).filter(
+            $e => MIL.isVisible($e) && !MIL.isOccluded($e))
 
         // 2025/03/22: google parent elements stopped having the 'g'
         // class. so the filter() code below is no longer

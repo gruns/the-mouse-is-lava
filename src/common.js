@@ -52,10 +52,16 @@ window.__MIL = {}
             return false
         }
 
+        return true
+    }
+    MIL.isVisible = isVisible
+
+    function isOccluded ($ele) {
         // run a super simple occlusion check by making sure the four
         // corners + center of the element are visible and not
         // occluded. if the ele is outside the viewport,
         // elementFromPoint() doesn't work. so ignore those elements
+        const rect = $ele.getBoundingClientRect()
         const points = [
             [Math.floor((rect.left + rect.right) / 2), Math.floor((rect.top + rect.bottom) / 2)],
             [Math.floor(rect.left + 1), Math.floor(rect.top + 1)],
@@ -74,11 +80,11 @@ window.__MIL = {}
 
             const topEl = document.elementFromPoint(x, y)
             if (!$ele.contains(topEl) && topEl !== $ele) {
-                return false
+                return true
             }
         }
 
-        return true
+        return false
     }
-    MIL.isVisible = isVisible
+    MIL.isOccluded = isOccluded
 })()

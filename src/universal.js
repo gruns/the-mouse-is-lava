@@ -221,8 +221,9 @@
     }
 
     function selectMatchFromOffset (offset) {
-        let $matches = Array.from(document.querySelectorAll('mark')).filter(
-            $e => MIL.isVisible($e) && MIL.isInViewport($e))
+        const $marks = document.querySelectorAll('mark')
+        let $matches = Array.from($marks).filter($e =>
+            MIL.isVisible($e) && !MIL.isOccluded($e) && MIL.isInViewport($e))
 
         const $selected = document.querySelector('mark.selected')
         if ($matches.length > 0 && !$selected) {  // select first match
