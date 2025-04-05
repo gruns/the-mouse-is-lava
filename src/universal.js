@@ -126,19 +126,14 @@
 
     function findAllInteractableTextElements () {
         // TODO(ans): support <textarea> elements, too
-        const $inputs = []
+        const $allInputs = Array.from(d.querySelectorAll('input'))
 
-        const $allInputs = d.querySelectorAll('input')
-        for (const $input of $allInputs) {
-            // TODO(ans): focus input elements that are hidden. eg
-            // inputs on amazon's order history page
-            // https://www.amazon.com/gp/css/order-history
-            if (MIL.isVisible($input) && MIL.isInViewport($input)
-                && $input.type === 'text' && !$input.disabled) {
-
-                $inputs.push($input)
-            }
-        }
+        // TODO(ans): focus input elements that are hidden. eg inputs on
+        // amazon's order history page
+        // https://www.amazon.com/gp/css/order-history
+        const $inputs = $allInputs.filter($input =>
+            (MIL.isVisible($input) && MIL.isInViewport($input)
+             && $input.type === 'text' && !$input.disabled))
 
         return $inputs
     }
