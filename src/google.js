@@ -130,7 +130,6 @@
         //   not a search result parent ele:   div.liYKde.g.VjDLd
         let $eles = d.querySelectorAll('#search h3:first-of-type')
 
-
         // filter out results that are hidden or occluded, like behind
         // dropdowns in the `People also ask` and `Things to know`
         // sections
