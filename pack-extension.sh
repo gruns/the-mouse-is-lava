@@ -7,4 +7,4 @@ filename=mouse-is-lava
 (cd src/ && zip -r "../${filename}.zip" . -x '*~')
 
 echo
-echo To publish, upload "${filename}.zip" to the Chrome Store
+echo To publish MIL to the Chrome Store, upload "${filename}.zip" as a new package
