@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "The Mouse is Lava",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "description": "Keyboard shortcuts to navigate websites with your keyboard. Don't touch that mouse. Made by Ansgar Grunseid.",
     "permissions": [
         "activeTab",
