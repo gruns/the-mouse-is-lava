@@ -126,14 +126,26 @@
 
     function findAllInteractableTextElements () {
         // TODO(ans): support <textarea> elements, too
+        //
+        // TODO(ans): support input elements in iframes, too. ex:
+        // https://wallet.uber.com/payment-profile/add/gift-card
         const $allInputs = Array.from(d.querySelectorAll('input'))
 
-        // TODO(ans): focus input elements that are hidden. eg inputs on
-        // amazon's order history page
-        // https://www.amazon.com/gp/css/order-history
+        // types of <input>s with text entry and thus should be selected
+        // and iterated through
+        //
+        // TODO(ans): should type='password' be selected with ctrl+b?
+        const textInputTypes = [
+            'text', 'search', 'email', 'url', 'tel', 'password']
+
+        // TODO(ans): include input elements that may be occluded in
+        // iteration. eg inputs on amazon's order history page
+        // https://www.amazon.com/gp/css/order-history when the top
+        // <input> is focused and the autocompletion popup occludes the
+        // order search <input> ele
         const $inputs = $allInputs.filter($input =>
             (MIL.isVisible($input) && MIL.isInViewport($input)
-             && $input.type === 'text' && !$input.disabled))
+             && textInputTypes.includes($input.type) && !$input.disabled))
 
         return $inputs
     }
