@@ -1,8 +1,17 @@
 ================================================================================
+ v0.3.0
+================================================================================
+added: ctrl+b now iterates through both <input> and <textarea> elements,
+  not just <input> elements
+changed: improved the ctrl+i link finder algorithm to find and match all
+  text nodes that are on top of a clickable element in the stacking
+  order. so even if the text element isn't a direct child of a clickable
+  parent, the text can still be found, selected, and clicked
+
+================================================================================
  v0.2.3
 ================================================================================
 changed: include <input> type=[search, email, url, tel, and password] in
   ctrl+b iteration. all of those support text entry in chrome
-
 
 this changelog wasn't maintained prior to v0.2.3
