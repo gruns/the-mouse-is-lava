@@ -195,21 +195,46 @@
     ////////////////////////////////////////////////////////////////////
 
     // IMPORTANT: this function can't detect 'click' listeners added
-    // with addEventListener('click', ...). there's no way to test for
-    // those in JS, unfortunately 😕; getEventListeners() is a
+    // with $ele.addEventListener('click', ...). there's no way to test
+    // for those in JS, unfortunately 😕; getEventListeners() is a
     // non-standard JS API only available in chrome dev tools
     function firstClickableAncestor ($ele, depth=7) {
         if (!$ele || depth < 1) {
             return null
         }
 
-        if ($ele.tagName === 'A'
+        if ($ele.tagName === 'A' || $ele.tagName === 'BUTTON'
+            || ($ele.tagName === 'INPUT' && $ele.type === 'submit')
             || ($ele.nodeType === Node.ELEMENT_NODE
                 && $ele.hasAttribute('onclick'))) {
             return $ele
         }
 
         return firstClickableAncestor($ele.parentElement, depth - 1)
+    }
+
+    function firstClickableBelow ($textNode) {
+        // get all elements under the center of the text node, excluding
+        // the text node itself
+        const range = d.createRange()
+        range.selectNode($textNode)
+        const rect = range.getBoundingClientRect()
+        const centerX = rect.left + (rect.width / 2)
+        const centerY = rect.top + (rect.height / 2)
+        const $elesAtPoint = Array.from(d.elementsFromPoint(centerX, centerY))
+            .filter($ele => $ele !== $textNode)
+
+        // find the first clickable, visible element, iterating from the
+        // top to bottom by the visual stacking order
+        for (const $ele of $elesAtPoint) {
+            const $clickableAncestor = firstClickableAncestor($ele, 1)
+            if ($clickableAncestor && MIL.isVisible($clickableAncestor)
+                && MIL.isInViewport($clickableAncestor)) {
+                return $clickableAncestor
+            }
+        }
+        
+        return null
     }
 
     function findInViewport (query) {
@@ -220,11 +245,13 @@
             acrossElements: true,
             separateWordSearch: false,
             filter: ($foundNode, foundTerm, totalCounter, counter) => {
-                return firstClickableAncestor($foundNode)
+                const isTextNodeClickable = !!firstClickableBelow($foundNode)
+                return isTextNodeClickable
+            },
+            done: () => {
+                selectMatchFromOffset(0)
             },
         })
-
-        selectMatchFromOffset(0)
     }
     MIL.findInViewport = findInViewport
 
@@ -242,10 +269,13 @@
     function selectMatchFromOffset (offset) {
         const $marks = document.querySelectorAll('mark')
         let $matches = Array.from($marks).filter($e =>
-            MIL.isVisible($e) && !MIL.isOccluded($e) && MIL.isInViewport($e))
-
+            MIL.isVisible($e) && MIL.isInViewport($e))
+            //MIL.isVisible($e) && !MIL.isOccluded($e) && MIL.isInViewport($e))
         const $selected = document.querySelector('mark.selected')
-        if ($matches.length > 0 && !$selected) {  // select first match
+
+        if ($matches.length === 0) {
+            return
+        } else if (!$selected) {  // select first match
             $matches[0].classList.add('selected')
             return
         } else if ($selected) {
@@ -254,14 +284,10 @@
 
         // filter down to just the clickable elements of matches, as
         // those are what should be iterated through
-        const $matchesToClickables = $matches.map(
-            $e => firstClickableAncestor($e))
+        const $matchesToClickables = $matches.map($e => firstClickableBelow($e))
 
         const $clickables = [...new Set($matchesToClickables)]
-        //const $clickables = [...new Set($matchesToClickables.filter(
-        //    $e => MIL.isVisible($e) && MIL.isInViewport($e)))]
-
-        const $currentClickable = firstClickableAncestor($selected)
+        const $currentClickable = firstClickableBelow($selected)
         const $currentClickableIdx = $clickables.indexOf($currentClickable) || 0
         const $clickableIdxToSelect = (
             ($currentClickableIdx + offset + $clickables.length)
@@ -285,7 +311,7 @@
             return
         }
 
-        const $currentClickable = firstClickableAncestor($selected)
+        const $currentClickable = firstClickableBelow($selected)
         if (!$currentClickable) {
             return
         }
