@@ -1,0 +1,21 @@
+<body>
+  <form id='form' style='margin: 60px'>
+    <br>
+    <br>
+    <br>
+    <input type='submit' value='lolsup' style='font-size: 16px'>
+    <br>
+    <br>
+    <br>
+    <button style='font-size: 16px'>hello</button>
+    <br>
+    <br>
+    <br>
+    <script>
+      document.getElementById('form').addEventListener('submit', event => {
+          event.preventDefault()  // stop page reload
+          alert('sup')
+      })
+    </script>
+  </form>
+</body>
