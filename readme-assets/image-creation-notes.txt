@@ -1,0 +1,18 @@
+### create logo from unicode emoji
+
+- open keynote
+- create slide with nothing but the emoji character as text
+- click `Format`, upper right, and set `Current Fill` to `No Fill`
+  (transparent background)
+- File → Export To → Images → PNG with transparent background → Save
+- open the exported png in gimp
+- Image → Crop to Content
+- export as png
+- voila ✨
+
+
+### encode gif from mp4 with ffmpeg
+
+$ ffmpeg -i link-finder.mov -ss 0.6 -c:v libx264 -preset fast -an -y link-finder.mp4
+$ ffmpeg -i link-finder.mp4 -vf "fps=12,scale=800:-1:flags=lanczos,palettegen" -y palette.png
+$ ffmpeg -i link-finder.mp4 -i palette.png -filter_complex "fps=12,scale=800:-1:flags=lanczos[x];[x][1:v]paletteuse" -y link-finder.gif
