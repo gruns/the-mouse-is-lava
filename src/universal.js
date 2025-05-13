@@ -203,7 +203,9 @@
             return null
         }
 
-        if ($ele.tagName === 'A' || $ele.tagName === 'BUTTON'
+        if (getComputedStyle($ele).cursor === 'pointer'
+            || $ele.tagName === 'A'
+            || $ele.tagName === 'BUTTON'
             || ($ele.tagName === 'INPUT' && $ele.type === 'submit')
             || ($ele.nodeType === Node.ELEMENT_NODE
                 && $ele.hasAttribute('onclick'))) {

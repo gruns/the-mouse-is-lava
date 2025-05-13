@@ -1,0 +1,81 @@
+<body style="padding: 50px; background-color: #ccc; font-size: 1.5em;">
+  <script>
+    window.addEventListener('load', () => {
+        const ids = ['lolsup', 'foobar', 'hehe', 'parent-only']
+        for (const id of ids) {
+            document.getElementById(id).addEventListener('click', () => {
+                console.log(id)
+            })
+        }
+    })
+  </script>
+
+  page with different elements and parent elements with `cursor: pointer` to test ctrl+i
+  <br>
+  <br>
+  <span id='lolsup' style='cursor: pointer'>lolsup</span>
+  <br>
+  <br>
+  <div id='foobar' style='cursor: pointer'>
+    <span>
+      <b>foobar</b>
+    </span>
+  </div>
+  <br>
+  <br>
+  <ul id='hehe' style='cursor: pointer'>
+    <li>
+      <div>
+        <span>
+          hehe
+        </span>
+      </div>
+    </li>
+  </ul>
+  <br>
+  <br>
+  <div id='parent-only' style='cursor: pointer'>
+    <span style='cursor: default'>only parent has cursor: pointer</span>
+  </div>
+  <br>
+  <br>
+  <label for='foobar'>label for #foobar</label>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <input type="text" id="3"></input>
+</body>
